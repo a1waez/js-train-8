@@ -10,6 +10,7 @@ function getUsersFromDatabase(array) {
   // Використовуємо метод `Array.from` для створення масиву користувачів зі списку, елементи якого це об'єкти які міститять
   // id який дорівнює id користувача,firstName який дорівнює firstName користувача в верхньому регістрі та years який дорівнює age користувача
   // Повертаємо масив користувачів
+  return Array.from(array);
 }
 
 // Приклад використання функції getUsersFromDatabase
@@ -38,8 +39,13 @@ console.log(getUsersFromDatabase(userRecords));
  */
 function removeLastElement(arr) {
   // Перевіряємо, чи масив не є порожнім, якщо порожній повертаємо  undefined
+  if (arr.length === 0) {
+    return undefined;
+  }
   // Використовуємо метод `pop` для видалення останнього елементу з масиву
+  arr.pop();
   // Повертаємо оновлений масив
+  return arr;
 }
 
 // Приклад використання функції removeLastElement
@@ -58,6 +64,7 @@ console.log(removeLastElement([1, 2, 3, 4, 5])); // Виведе [1, 2, 3, 4]
 function filterByCondition(arr, condition) {
   // Використовуємо метод `filter` для фільтрації масиву
   // Повертаємо відфільтрований масив
+  return arr.filter(condition);
 }
 
 // Приклад використання функції filterByCondition
@@ -79,6 +86,7 @@ function checkArray(obj) {
   // Повертаємо результат перевірки
   // Якщо об'єкт є null або undefined, виводимо повідомлення про помилку Помилка: Вхідний об'єкт є null або undefined.
   //Повертаємо false
+  return Array.isArray(obj);
 }
 
 // Приклад використання функції checkArray
@@ -98,6 +106,7 @@ function createArray(...elements) {
   // Повертаємо створений масив
   // Якщо не передано жодного елементу, виводимо повідомлення про помилку
   //Повертаємо пустий масив
+  return Array.of(...elements);
 }
 
 // Приклад використання функції createArray
@@ -114,11 +123,11 @@ console.log(createArray(1, 2, 3, 4, 5)); // Виведе [1, 2, 3, 4, 5]
  */
 function getElementAtIndex(arr, index) {
   // Перевіряємо, чи масив не є порожнім
-  // Повертаємо undefined
   // Перевіряємо, чи індекс знаходиться в межах довжини масиву
   // Отримуємо елемент з масиву за заданим індексом
   // Повертаємо отриманий елемент
   // Якщо індекс виходить за межі масиву,повертаємо undefined
+  return arr.at(index);
 }
 
 // Приклад використання функції getElementAtIndex
@@ -138,8 +147,11 @@ function combineAndReverseArrays(arr1, arr2) {
   // Перевіряємо, чи обидва аргументи є масивами
   //  Якщо ні повертаємо пустий масив
   // Об'єднуємо два масиви за допомогою методу `concat`
+  let arr3 = arr1.concat(arr2);
   // Обертаємо отриманий об'єднаний масив за допомогою методу `reverse`
+  arr3.reverse();
   // Повертаємо об'єднаний та обернутий масив
+  return arr3;
 }
 
 // Приклад використання функції combineAndReverseArrays
@@ -183,8 +195,13 @@ console.log(findElementIndexes([1, 2, 3, 4, 5, 2], 2)); //Виведе [ 1, 5 ]
  */
 function copyAndSwapElements(arr, target, start, end) {
   // Перевіряємо, чи індекси належать межам масиву якщо ні виводимо рядок Неприпустимі індекси
+  if (arr.length === 0) {
+    console.log("Неприпустимі індекси");
+  }
   // Копіюємо та переставляємо елементи за допомогою методу `copyWithin`
+  let modifiedArr = arr.copyWithin(target, start, end);
   // Повертаємо модифікований масив
+  return modifiedArr;
 }
 
 // Приклад використання функції copyAndSwapElements
@@ -204,10 +221,23 @@ console.log(copyAndSwapElements([1, 2, 3, 4, 5], 0, 2, 4)); // Виведе [3, 
  */
 function sortByKey(arr, key) {
   // Використовуємо метод `sort` передаємо в нього два аргументи a та b, для сортування масиву об'єктів за заданим ключем
-  // якщо a[key] < b[key] повертаємо -1
-  // якщо a[key] > b[key] повертаємо 1
-  // інакше повертаємо 0
+  arr.sort(function (a, b) {
+    // якщо a[key] < b[key] повертаємо -1
+    if (a[key] < b[key]) {
+      return -1;
+    }
+    // якщо a[key] > b[key] повертаємо 1
+    if (a[key] > b[key]) {
+      return 1;
+    }
+    // інакше повертаємо 0
+    else {
+      return 0;
+    }
+  });
+
   // Повертаємо відсортований масив об'єктів
+  return arr;
 }
 
 console.log("Завдання: 10 ==============================");
